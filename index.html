@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+  <title>AWS CDK And AWS Lambda Workshop</title>
+
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/reveal.css" />
+  <link rel="stylesheet" href="css/theme/solarized.css" />
+
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="lib/css/monokai.css" />
+
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.type = "text/css";
+    link.href = window.location.search.match(/print-pdf/gi)
+      ? "css/print/pdf.css"
+      : "css/print/paper.css";
+    document.getElementsByTagName("head")[0].appendChild(link);
+  </script>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <h2>AWS CDK</h2>
+        <h2>And</h2>
+        <h2>AWS Lambda</h2>
+        <h2>Workshop</h2>
+      </section>
+      <section>
+        <h2>Prerequisites</h2>
+        <h5>General</h5>
+        <ul>
+          <li>
+            AWS account
+            <br />
+            <small>(alternatively I can create access keys and email them)</small>
+          </li>
+          <li>
+            AWS CLI:
+            <a href="https://docs.aws.amazon.com/en_pv/cli/latest/userguide/install-windows.html"
+              target="_blank">Windows</a>,
+            <a href="https://docs.aws.amazon.com/en_pv/cli/latest/userguide/install-linux.html"
+              target="_blank">Linux</a>,
+            <a href="https://docs.aws.amazon.com/en_pv/cli/latest/userguide/install-macos.html" target="_blank">Mac</a>
+          </li>
+          <li>
+            AWS
+            <a href="https://console.aws.amazon.com/iam/home#/security_credentials" target="_blank">access key</a>
+            <br />
+            <small>(for AWS CLI)</small>
+          </li>
+          <li>
+            <a href="https://git-scm.com/downloads" target="_blank">git</a>
+          </li>
+          <li>
+            <a href="https://code.visualstudio.com/Download" target="_blank">Visual Studio Code</a>
+            <br />
+            <small>or any other IDE or text editor with Typescript support</small>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2>Prerequisites</h2>
+        <h5>Linux</h5>
+        <ul>
+          <li>
+            Latest version of Node.js
+            <br />
+            <small>hint: use
+              <a href="https://github.com/nvm-sh/nvm" target="_blank">nvm</a></small>
+          </li>
+          <li>
+            AWS CDK:
+            <pre><code class="bash" data-trim>npm install -g aws-cdk@1.12.0</code></pre>
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2>Prerequisites</h2>
+        <h5>Other Platforms</h5>
+        <ul>
+          <li>
+            All roads lead to
+            <span style="text-decoration: line-through;">Rome</span> Linux :)
+          </li>
+          <li>
+            Because some of the AWS CDK libraries might not work under a
+            non-Linux platform (e.g.
+            <a href="https://docs.aws.amazon.com/cdk/api/latest/docs/aws-s3-deployment-readme.html#development"
+              target="_blank">this one</a>)
+          </li>
+          <li>
+            Maybe they'll work under Mac (since it's Unix-like platform) but
+            I'm not sure
+          </li>
+        </ul>
+      </section>
+      <section>
+        <h2>Prerequisites</h2>
+        <h5>Other Platforms</h5>
+        <p>
+          Suggested workaround:
+        </p>
+        <ol>
+          <li>Launch an EC2 instance with all the necessary tooling and SSH into it</li>
+          <li>Edit code locally in your favorite IDE</li>
+          <li>Commit and push changes</li>
+          <li>From within the EC2 instance:
+            <ol>
+              <li>pull the changes</li>
+              <li>run CDK commands</li>
+            </ol>
+          </li>
+        </ol>
+      </section>
+      <section>
+        <h2>Prerequisites</h2>
+        <h5>Other Platforms</h5>
+        <p>
+          Suggested workaround:
+        </p>
+        <ol>
+          <li>
+            Launch an EC2 instance with all the necessary tooling and SSH into
+            it
+            <script type="TODO">
+                add link to the dev env subproject
+              </script>
+          </li>
+          <li>Edit code locally in your favorite IDE</li>
+          <li>Commit and push changes</li>
+          <li>
+            From within the EC2 instance:
+            <ol>
+              <li>pull the changes</li>
+              <li>run CDK commands</li>
+            </ol>
+          </li>
+        </ol>
+      </section>
+      <section>
+        <h2>Infrastructure As Code</h2>
+        <h5>Other Platforms</h5>
+        <p>
+          Suggested workaround:
+        </p>
+        <ol>
+          <li>
+            Launch an EC2 instance with all the necessary tooling and SSH into
+            it
+            <script type="TODO">
+                  add link to the dev env subproject
+                </script>
+          </li>
+          <li>Edit code locally in your favorite IDE</li>
+          <li>Commit and push changes</li>
+          <li>
+            From within the EC2 instance:
+            <ol>
+              <li>pull the changes</li>
+              <li>run CDK commands</li>
+            </ol>
+          </li>
+        </ol>
+      </section>
+    </div>
+  </div>
+
+  <script src="js/reveal.js"></script>
+
+  <script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+      dependencies: [
+        { src: "plugin/markdown/marked.js" },
+        { src: "plugin/markdown/markdown.js" },
+        { src: "plugin/notes/notes.js", async: true },
+        { src: "plugin/highlight/highlight.js", async: true }
+      ]
+    });
+  </script>
+</body>
+
+</html>
