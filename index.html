@@ -14,6 +14,37 @@
   <!-- Theme used for syntax highlighting of code -->
   <link rel="stylesheet" href="lib/css/monokai.css" />
 
+  <style>
+    div.footer {
+      position: fixed;
+      bottom: 25px;
+      left: 25px;
+      z-index: 999;
+    }
+
+    div.footer>div {
+      display: flex;
+      flex-direction: row;
+    }
+
+    div.footer>div>a {
+      padding-top: 8px;
+      padding-left: 8px;
+    }
+
+    html.low-opacity .slide-background {
+      opacity: 0.1 !important;
+    }
+
+    html.middle-opacity .slide-background {
+      opacity: 0.5 !important;
+    }
+
+    .stress {
+      color: red;
+    }
+  </style>
+
   <!-- Printing and PDF exports -->
   <script>
     var link = document.createElement("link");
@@ -27,22 +58,28 @@
 </head>
 
 <body>
+  <div class="footer">
+    <div>
+      <img src="asset/consol.png" />
+      <a href="https://www.consol.de" target="_blank">www.consol.de</a>
+    </div>
+  </div>
   <div class="reveal">
     <div class="slides">
-      <section>
+      <section data-background="asset/pero-kalimero-9BJRGlqoIUk-unsplash.jpg">
         <h2>AWS CDK</h2>
         <h2>And</h2>
         <h2>AWS Lambda</h2>
         <h2>Workshop</h2>
       </section>
-      <section>
+      <section data-background="asset/todd-quackenbush-IClZBVw5W5A-unsplash.jpg" data-state="low-opacity">
         <h2>Prerequisites</h2>
         <h5>General</h5>
         <ul>
           <li>
             AWS account
             <br />
-            <small>(alternatively I can create access keys and email them)</small>
+            <small>(Captain Obvious nods his head approvingly)</small>
           </li>
           <li>
             AWS CLI:
@@ -68,7 +105,7 @@
           </li>
         </ul>
       </section>
-      <section>
+      <section data-background="asset/todd-quackenbush-IClZBVw5W5A-unsplash.jpg" data-state="low-opacity">
         <h2>Prerequisites</h2>
         <h5>Linux</h5>
         <ul>
@@ -80,11 +117,11 @@
           </li>
           <li>
             AWS CDK:
-            <pre><code class="bash" data-trim>npm install -g aws-cdk@1.12.0</code></pre>
+            <pre><code class="bash" data-trim>npm install -g aws-cdk@0.39.0</code></pre>
           </li>
         </ul>
       </section>
-      <section>
+      <section data-background="asset/todd-quackenbush-IClZBVw5W5A-unsplash.jpg" data-state="low-opacity">
         <h2>Prerequisites</h2>
         <h5>Other Platforms</h5>
         <ul>
@@ -104,11 +141,12 @@
           </li>
         </ul>
       </section>
-      <section>
+      <section data-background="asset/todd-quackenbush-IClZBVw5W5A-unsplash.jpg" data-state="low-opacity">
         <h2>Prerequisites</h2>
         <h5>Other Platforms</h5>
         <p>
-          Suggested workaround:
+          Suggested <a href="https://github.com/ConSol/aws-cdk-and-lambda-workshop/tree/master/aws-ec2-dev-env"
+            target="_blank">workaround</a>:
         </p>
         <ol>
           <li>Launch an EC2 instance with all the necessary tooling and SSH into it</li>
@@ -122,55 +160,76 @@
           </li>
         </ol>
       </section>
-      <section>
-        <h2>Prerequisites</h2>
-        <h5>Other Platforms</h5>
-        <p>
-          Suggested workaround:
-        </p>
-        <ol>
-          <li>
-            Launch an EC2 instance with all the necessary tooling and SSH into
-            it
-            <script type="TODO">
-                add link to the dev env subproject
-              </script>
-          </li>
-          <li>Edit code locally in your favorite IDE</li>
-          <li>Commit and push changes</li>
-          <li>
-            From within the EC2 instance:
-            <ol>
-              <li>pull the changes</li>
-              <li>run CDK commands</li>
-            </ol>
-          </li>
-        </ol>
+      <section data-background="asset/todd-quackenbush-IClZBVw5W5A-unsplash.jpg" data-state="middle-opacity">
+        <h2>Gear Up!</h2>
+        <small>
+          <a href="https://github.com/ConSol/aws-cdk-and-lambda-workshop/tree/master/aws-ec2-dev-env"
+            target="_blank">workaround link</a>
+        </small>
       </section>
-      <section>
+      <section data-background="asset/infrastructure.jpg" data-state="low-opacity">
         <h2>Infrastructure As Code</h2>
-        <h5>Other Platforms</h5>
+        <h5>General Idea</h5>
         <p>
-          Suggested workaround:
+          Cloud <span class="stress">resources</span> (RDS / S3 storage / VPC network configuration / EC2 launch
+          configurations etc.) are described
+          in (usually) human-readable text files which are stored in a git <span class="stress">repository</span> and
+          are
+          therefore <span class="stress">versioned</span>.
         </p>
-        <ol>
-          <li>
-            Launch an EC2 instance with all the necessary tooling and SSH into
-            it
-            <script type="TODO">
-                  add link to the dev env subproject
-                </script>
+        <p>
+          A special <span class="stress">tool</span> reads the files (e.g. during a CI/CD pipeline run) and provisiones
+          the defined infrastructure.
+        </p>
+      </section>
+      <section data-background="asset/infrastructure.jpg" data-state="low-opacity">
+        <h2>Infrastructure As Code</h2>
+        <h5>Why?</h5>
+        <ul>
+          <li><span class="stress">Repository</span> => streamline GitOps <small>infrastructure can be
+              committed/reviewed/merged/tagged/etc.</small></li>
+          <li><span class="stress">Versioning</span> => track changes, do "time travel"</li>
+          <li><span class="stress">Tool</span> => minimize human factor
+            <small>e.g. get rid of typos during manual provisioning</small></li>
+          <li><span class="stress">Tool</span> => automation => faster iterations <small>have more time for development
+              and other important job</small></li>
+        </ul>
+      </section>
+      <section data-background="asset/infrastructure.jpg" data-state="low-opacity">
+        <h2>Infrastructure As Code</h2>
+        <h5>How?</h5>
+        <ul>
+          <li>Bash scripting (Early Middle Ages)</li>
+          <li>Pythong scripting using <a href="https://boto3.amazonaws.com/v1/documentation/api/latest/index.html"
+              target="_blank">boto3</a> (Late Middle Ages)
           </li>
-          <li>Edit code locally in your favorite IDE</li>
-          <li>Commit and push changes</li>
-          <li>
-            From within the EC2 instance:
-            <ol>
-              <li>pull the changes</li>
-              <li>run CDK commands</li>
-            </ol>
+          <li><a href="https://aws.amazon.com/cloudformation/" target="_blank">CloudFormation</a> (Industrial Age)</li>
+          <li><a href="https://docs.aws.amazon.com/cdk/index.html" target="_blank">Cloud Development Kit</a> (Future)
           </li>
-        </ol>
+        </ul>
+      </section>
+      <section data-background="asset/infrastructure.jpg" data-state="middle-opacity">
+        <h2>
+          Let's <a href="https://docs.aws.amazon.com/en_pv/cdk/latest/guide/home.html" target="_blank">RTFM</a> a
+          Little Bit</h2>
+      </section>
+      <section data-background="asset/randy-fath-ymf4_9Y9S_A-unsplash.jpg" data-state="low-opacity">
+        <h2>What we'll build</h2>
+        <img data-src="asset/example-cdk-lambda-app.png">
+      </section>
+      <section data-background="asset/randy-fath-ymf4_9Y9S_A-unsplash.jpg" data-state="low-opacity">
+        <h2>What we'll build</h2>
+        <p>The final result is <a href="https://github.com/ConSol/aws-cdk-and-lambda-workshop" target="_blank">here</a>.
+        </p>
+        <p>However, as the Arthur Ashe put it:</p>
+        <blockquote cite="https://www.brainyquote.com/quotes/arthur_ashe_371528">
+          Success is a journey, not a destination. The doing is often more important than the outcome.
+        </blockquote>
+      </section>
+      <section data-background="asset/randy-fath-ymf4_9Y9S_A-unsplash.jpg" data-state="middle-opacity">
+        <h2>Let's build it</h2>
+        <smal>we'll need the web UI from the <a href="https://github.com/ConSol/aws-cdk-and-lambda-workshop"
+            target="_blank">final result</a> though :)</smal>
       </section>
     </div>
   </div>
